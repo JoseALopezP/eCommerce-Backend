@@ -1,9 +1,12 @@
-const express = require('express');
+import {productsRoute} from './routes/products.js';
+import {cartRoute} from './routes/cart.js';
+import express from "express";
+import http from "http";
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
-const {Server: HttpServer} = require('http');
-import { productRoute } from './routes/products.js';
-import { cartRoute } from './routes/cart.js';
 
+const {Server: HttpServer} = http;
 
 const port = process.env.PORT;
 const publicRoot = './public';
@@ -15,8 +18,8 @@ app.use(express.urlencoded({ extended: true}));
 const httpServer = new HttpServer(app);
 
 //Routes
-aplicacion.use('/api/products', productRoute);
-aplicacion.use('/api/cart', cartRoute);
+app.use('/api/products', productsRoute);
+app.use('/api/cart', cartRoute);
 
 //Public
 app.use(express.static(publicRoot));

@@ -1,17 +1,17 @@
 import express from 'express';
-import { Container } from '../contenedor/containerFs.js';
-const productRoute = express.Router();
+import { Container } from '../container/containerFs.js';
+const productsRoute = express.Router();
 
 const products = new Container('src/db/products.txt');
 
-const authMiddleware = app.use((req, res, next) => {
+const authMiddleware = (req, res, next) => {
     const admin = req.headers.admin;
     if(req.header(admin)){
         next()
     }else{
         res.status(401).json({error : -1, description: "unauthorized"})
     }
-})
+}
 
 productsRoute.get('/', async (req, res) => {
     const productsList = await products.getAll();
@@ -55,6 +55,6 @@ productsRoute.delete('/:id', authMiddleware, async (req, res) => {
     const {id} = req.params;
     const wasDeleted = await products.deleteById(id);
     res.status(200).json({"success": "product successfully removed"})
-})
+});
 
 export { productsRoute };

@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 class Container {
     constructor(name){
@@ -77,5 +77,5 @@ class Container {
 
 }
 
-module.exports = Container;
+export {Container};
 
