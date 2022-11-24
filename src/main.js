@@ -26,7 +26,7 @@ app.use(express.static(publicRoot));
 
 app.use((req, res, next) => {
     if (!req.route) {
-      res.status(404).send({ error : -2, descripcion: `ruta ${peticion.url} no encontrada` });
+      res.status(404).send({ error : -2, descripcion: `ruta ${req.url} no encontrada` });
     } else {
       next();
     }

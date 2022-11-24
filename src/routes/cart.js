@@ -38,7 +38,7 @@ cartRoute.delete('/:id/productos/:id_prod', async (req, res) => {
 });
 
 cartRoute.post('/:id/productos', async(req,res) => {
-    const cartId = parseInt(peticion.params.id);
+    const cartId = parseInt(req.params.id);
     const productId = req.body.productId;
     const product = await products.getById(productId);
     const cartX = await cart.getById(cartId);
