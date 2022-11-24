@@ -54,11 +54,7 @@ productsRoute.put('/:id', authMiddleware, async (req, res) => {
 productsRoute.delete('/:id', authMiddleware, async (req, res) => {
     const {id} = req.params;
     const wasDeleted = await products.deleteById(id);
-    if(wasDeleted){
-        res.status(200).json({"success": "product successfully removed"})
-    }else{
-        res.status(404).json({error : -6, description: "product not found"})
-    }
+    res.status(200).json({"success": "product successfully removed"})
 })
 
 export { productsRoute };
