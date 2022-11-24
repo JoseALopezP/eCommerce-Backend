@@ -9,7 +9,7 @@ const authMiddleware = app.use((req, res, next) => {
     if(req.header(admin)){
         next()
     }else{
-        res.status(401).json({"error": "unauthorized"})
+        res.status(401).json({error : -1, description: "unauthorized"})
     }
 })
 
@@ -24,7 +24,7 @@ productsRoute.get('/:id', async (req, res) => {
     if(product){
         res.status(200).json(product)
     }else{
-        res.status(400).json({"error": "product not found"})
+        res.status(400).json({error : -3, description: "product not found"})
     }
 })
 
@@ -35,7 +35,7 @@ productsRoute.post('/',authMiddleware, async (req,res) => {
     if(newProductId){
         res.status(200).json({"success" : "product added with ID: " + newProductId})
     }else{
-        res.status(400).json({"error": "invalid"})
+        res.status(400).json({error : -4, description: "invalid"})
     }
 })
 
@@ -47,16 +47,18 @@ productsRoute.put('/:id', authMiddleware, async (req, res) => {
     if(wasUpdated){
         res.status(200).json({"success" : "product updated"})
     }else{
-        res.status(404).json({"error": "product not found"})
+        res.status(404).json({error : -5, description: "product not found"})
     }
 })
 
-routerProducts.delete('/:id', authMiddleware, async (req, res) => {
+productsRoute.delete('/:id', authMiddleware, async (req, res) => {
     const {id} = req.params;
     const wasDeleted = await products.deleteById(id);
     if(wasDeleted){
         res.status(200).json({"success": "product successfully removed"})
     }else{
-        res.status(404).json({"error": "product not found"})
+        res.status(404).json({error : -6, description: "product not found"})
     }
 })
+
+export { productsRoute };
