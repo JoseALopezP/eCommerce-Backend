@@ -1,5 +1,5 @@
-import {productsRoute} from './routes/products.js';
-import {cartRoute} from './routes/cart.js';
+import {productsRoute} from './src/routes/products.js';
+import {cartRoute} from './src/routes/cart.js';
 import express from "express";
 import http from "http";
 import dotenv from 'dotenv';
