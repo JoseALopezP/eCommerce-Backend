@@ -1,14 +1,13 @@
-import {productsRoute} from './src/routes/products.js';
-import {cartRoute} from './src/routes/cart.js';
+import {productsRoute} from './routes/products.js';
+import {cartRoute} from './routes/cart.js';
 import express from "express";
 import http from "http";
-import dotenv from 'dotenv';
-dotenv.config();
+
 const app = express();
 
 const {Server: HttpServer} = http;
 
-const port = process.env.PORT;
+
 const publicRoot = './public';
 
 //json
@@ -32,11 +31,5 @@ app.use((req, res, next) => {
     }
   })
 
-//Server
-const server = httpServer.listen(port, () => {
-    console.log(`Server listening to: ${server.address().port}`);
-});
 
-
-
-server.on('error', error => console.log(`Error: ${error}`));
+export {httpServer};
